@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<personalInfo>
+    <name>Hia Al Saleh</name>
+    <studentID>0868639</studentID>
+    <cityFrom>Windsor</cityFrom>
+    <age>19</age>
+    <programDescription>My goal in studying for this program is to increase my understanding and skill in this field.</programDescription>
+    <favouriteSport>Karate</favouriteSport>
+    <favouriteMusician>Franz Liszt</favouriteMusician>
+    <favouriteFood>
+        <foodName>Dolma</foodName>
+        <whyILikeIt>It is made up in Turkey and my mom always makes this yummy food.</whyILikeIt>
+    </favouriteFood>
+</personalInfo>

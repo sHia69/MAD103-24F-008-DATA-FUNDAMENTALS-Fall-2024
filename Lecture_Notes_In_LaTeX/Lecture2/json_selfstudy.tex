@@ -1,0 +1,138 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{geometry}
+\usepackage[utf8]{inputenc}
+\geometry{margin=1in}
+
+\title{JSON Self-Study Questions}
+\author{Hia Al Saleh}
+\date{September 16th, 2024}
+
+\begin{document}
+
+\maketitle
+
+\section*{Question 1: JSON Datatypes}
+
+\textbf{Question:} The following are all valid JSON datatypes EXCEPT for:
+
+\begin{itemize}
+  \item Array
+  \item Integer
+  \item String
+  \item Object
+\end{itemize}
+
+\textbf{Answer:} The correct answer is \textbf{Integer}. JSON does not have a specific "Integer" type. Instead, it has the \textbf{Number} datatype, which includes both integers and floating-point numbers.
+
+\section*{Question 2: JSON Stands For}
+
+\textbf{Question:} JSON stands for:
+\begin{itemize}
+  \item JavaScript Object Notation
+  \item JavaScript Schema Object Notation
+  \item JavaScript Scripted Object Notation
+  \item JavaScript Schema Oriented Notation
+\end{itemize}
+
+\textbf{Answer:} The correct answer is \textbf{JavaScript Object Notation}.
+
+\section*{Question 3: Symbol Separating Name-Value Pairs}
+
+\textbf{Question:} This symbol separates multiple name-value pairs in JSON:
+\begin{itemize}
+  \item :
+  \item \{ \}
+  \item [ ]
+  \item ,
+\end{itemize}
+
+\textbf{Answer:} The correct answer is \textbf{,} (comma). Commas are used to separate name-value pairs within objects and values in arrays.
+
+\section*{Question 4: Structure of JSON}
+
+\textbf{Question:} JSON is made up of:
+\begin{itemize}
+  \item name:value
+  \item elements:value
+  \item string:value
+  \item value:name
+\end{itemize}
+
+\textbf{Answer:} The correct answer is \textbf{name:value}. JSON consists of key-value pairs where the key is a string and the value can be any valid JSON datatype.
+
+\section*{Question 5: Validity of JSON}
+
+\textbf{Question:} The following is valid JSON:
+
+\begin{lstlisting}
+{
+  "name": "Doug"
+}
+\end{lstlisting}
+
+\textbf{True or False?}
+
+\textbf{Answer:} The correct answer is \textbf{True}. The provided JSON is valid as it contains a properly formatted key-value pair.
+
+\section*{Question 6: Valid JSON Examples}
+
+\textbf{Question:} This is valid JSON:
+\begin{itemize}
+  \item \{ overAge: TRUE \}
+  \item \{studentName: "Frank"\}
+  \item \{ "imageLocation" : "C:\\images" \}
+  \item \{ "numberOfStudents": 2 \}
+\end{itemize}
+
+\textbf{Answer:} The correct answer is \textbf{\{ "numberOfStudents": 2 \}}. The other options are invalid because:
+\begin{itemize}
+  \item Keys must be enclosed in double quotes.
+  \item The boolean value \texttt{TRUE} should be in lowercase (\texttt{true}).
+  \item Backslashes must be escaped.
+\end{itemize}
+
+\section*{Question 7: Null Datatype}
+
+\textbf{Question:} The null datatype is used to represent a value that cannot be defined, such as an empty string or the value 0.
+
+\textbf{True or False?}
+
+\textbf{Answer:} The correct answer is \textbf{False}. The null datatype in JSON explicitly represents the absence of a value, which is different from an empty string ("") or 0, which are valid values.
+
+\section*{Question 8: Validity of JSON}
+
+\textbf{Question:} The following is valid JSON:
+
+\begin{lstlisting}
+{
+  "numberOfPlayers": 6
+}
+\end{lstlisting}
+
+\textbf{True or False?}
+
+\textbf{Answer:} The correct answer is \textbf{True}. The provided JSON is valid, with a correct key-value pair and syntax.
+
+\section*{Question 9: Escaping Characters in JSON}
+
+\textbf{Question:} The following is valid JSON:
+
+\begin{lstlisting}
+{
+  "quote" : "He said \"Come out to the coast, we’ll get together, have a few laughs\""
+}
+\end{lstlisting}
+
+\textbf{True or False?}
+
+\textbf{Answer:} The correct answer is \textbf{False}. The inner double quotes need to be escaped using backslashes (\texttt{\textbackslash}). The corrected JSON would look like this:
+
+\begin{lstlisting}
+{
+  "quote": "He said \"Come out to the coast, we’ll get together, have a few laughs\""
+}
+\end{lstlisting}
+
+\end{document}

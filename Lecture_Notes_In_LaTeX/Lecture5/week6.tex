@@ -1,0 +1,164 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 202 - Database Management}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe \thepage}
+
+\begin{document}
+
+\title{Data Manipulation Language (DML) in SQL}
+\author{Hia Al Saleh}
+\date{October 7th, 2024}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction to DML}
+Data Manipulation Language (DML) is a subset of SQL commands used to manage data in database tables. The primary DML commands are:
+\begin{itemize}
+    \item \texttt{INSERT} - Adds new records to a table.
+    \item \texttt{UPDATE} - Modifies existing records.
+    \item \texttt{DELETE} - Removes records from a table.
+\end{itemize}
+
+DML commands require knowledge of:
+\begin{itemize}
+    \item Table column names and data types
+    \item Whether columns are primary keys, unique, or allow \texttt{NULL}s
+    \item Table and column constraints
+\end{itemize}
+
+\section{INSERT Command}
+The \texttt{INSERT} command adds new rows to a table. It can be executed in several ways:
+\subsection{Basic Syntax}
+\begin{verbatim}
+INSERT INTO tablename (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+\end{verbatim}
+The order and number of columns must match between the two lists. Each value must have a compatible data type with its respective column.
+
+\subsection{Insert by Column Positions}
+An \texttt{INSERT} without specifying column names relies on column order:
+\begin{verbatim}
+INSERT INTO tablename VALUES (value1, value2, value3, ...);
+\end{verbatim}
+This method is generally discouraged, as changes in the table structure may cause it to fail.
+
+\subsection{Insert from Another Table}
+The \texttt{INSERT INTO ... SELECT} syntax adds data from another table:
+\begin{verbatim}
+INSERT INTO tablename
+SELECT column1, column2
+FROM another_table
+WHERE condition;
+\end{verbatim}
+
+\subsection{Example}
+\begin{verbatim}
+CREATE TABLE teams (
+    team_id INTEGER NOT NULL PRIMARY KEY,
+    team_name VARCHAR(30) NOT NULL,
+    city VARCHAR(20) NOT NULL,
+    conference VARCHAR(10) NOT NULL
+);
+
+INSERT INTO teams (team_id, team_name, city, conference)
+VALUES (1, 'Red Wings', 'Detroit', 'Eastern');
+\end{verbatim}
+
+\section{UPDATE Command}
+The \texttt{UPDATE} command modifies existing records in a table. It can update all rows or a subset of rows based on a condition.
+\begin{verbatim}
+UPDATE tablename
+SET column1 = value1, column2 = value2
+WHERE condition;
+\end{verbatim}
+Using a \texttt{WHERE} clause restricts updates to specific rows.
+
+\subsection{Example with \texttt{WHERE}}
+\begin{verbatim}
+UPDATE superheroes
+SET secret_identity = 'Diana Prince'
+WHERE hero_id = 3;
+\end{verbatim}
+
+\subsection{Using Comparison Operators}
+Comparison operators such as \texttt{=}, \texttt{<>} (not equal), \texttt{<}, \texttt{>}, \texttt{<=}, and \texttt{>=} can be used in the \texttt{WHERE} clause to define conditions. Example:
+\begin{verbatim}
+UPDATE personnel
+SET salary = salary * 1.07
+WHERE jobgrade <= 4;
+\end{verbatim}
+
+\subsection{Pattern Matching with LIKE}
+The \texttt{LIKE} operator uses wildcards for pattern matching:
+\begin{verbatim}
+UPDATE superheroes
+SET gender = 'female'
+WHERE hero_name LIKE '%Woman';
+\end{verbatim}
+Here, \texttt{\%} matches any sequence of characters, while \texttt{\_} matches a single character.
+
+\section{DELETE Command}
+The \texttt{DELETE} command removes rows from a table. It does not require column names, as it removes entire rows.
+\begin{verbatim}
+DELETE FROM tablename
+WHERE condition;
+\end{verbatim}
+A \texttt{WHERE} clause is essential to avoid deleting all rows.
+
+\subsection{Example}
+\begin{verbatim}
+DELETE FROM superheroes
+WHERE hero_id > 3;
+\end{verbatim}
+
+\section{Preserving Referential Integrity with Foreign Keys}
+When inserting, updating, or deleting rows in tables with foreign key relationships, referential integrity must be maintained:
+\begin{itemize}
+    \item \textbf{Inserting a row} in a foreign-key table requires the foreign key value to match a primary key in the parent table.
+    \item \textbf{Updating a row} in the foreign-key table must ensure the updated foreign key matches an existing primary key in the parent table.
+    \item \textbf{Deleting a row} in the parent table may not be allowed if foreign keys in child tables reference that row.
+\end{itemize}
+
+\section{Auto-Incrementing IDs}
+Primary keys can be set to auto-increment, automatically generating unique values:
+\begin{verbatim}
+CREATE TABLE counting (
+    id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    name VARCHAR(10)
+);
+INSERT INTO counting (name) VALUES ('first');
+\end{verbatim}
+Auto-increment values continue to increase even if rows are deleted.
+
+\section{Examples of DML Commands with Constraints}
+\begin{itemize}
+    \item \textbf{Creating Tables with Foreign Keys}
+    \begin{verbatim}
+    CREATE TABLE authors (
+        id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        fname VARCHAR(20) NOT NULL,
+        lname VARCHAR(25) NOT NULL
+    );
+    
+    CREATE TABLE books (
+        id INTEGER AUTO_INCREMENT NOT NULL PRIMARY KEY,
+        title VARCHAR(25),
+        author_id INTEGER NOT NULL,
+        CONSTRAINT author_fk FOREIGN KEY (author_id)
+        REFERENCES authors(id)
+    );
+    \end{verbatim}
+
+    \item \textbf{Inserting Data with Foreign Key Constraint}
+    \begin{verbatim}
+    INSERT INTO books (title, author_id) VALUES ('Watchers', 1);
+    \end{verbatim}
+\end{itemize}
+
+\end{document}

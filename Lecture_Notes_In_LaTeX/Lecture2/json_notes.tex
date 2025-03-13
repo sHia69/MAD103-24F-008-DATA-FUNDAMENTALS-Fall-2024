@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\geometry{a4paper, margin=1in}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals - Fall 2024}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe  \thepage}
+
+\title{Notes on JSON}
+\author{Hia Al Saleh}
+\date{September 9th, 2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage 
+
+
+\section{Final Exercise}
+
+\begin{itemize}
+    \item \textbf{Objective}: Create a valid JSON document using the given information.
+    \item \textbf{Guidance}:
+    \begin{itemize}
+        \item Structure the document with appropriate key-value pairs.
+        \item Use meaningful names for the keys.
+        \item Verify the validity of the JSON after completion.
+    \end{itemize}
+\end{itemize}
+
+\section{What is JSON}
+
+\begin{itemize}
+    \item \textbf{Definition}: JSON stands for \textit{JavaScript Object Notation}.
+    \item \textbf{Purpose}: 
+    \begin{itemize}
+        \item Text format used for exchanging data between platforms.
+        \item It is a subset of JavaScript but works independently of it.
+    \end{itemize}
+    \item \textbf{Characteristics}:
+    \begin{itemize}
+        \item Portable, works across platforms and systems.
+        \item Based on the JavaScript object literal syntax.
+        \item Simple and easy to read.
+        \item Files use the \texttt{.json} extension.
+        \item Shorter than XML, as it does not require closing tags, leading to smaller file sizes and faster transfer.
+    \end{itemize}
+\end{itemize}
+
+\section{How is JSON Formatted}
+
+\begin{itemize}
+    \item \textbf{Syntax}:
+    \begin{itemize}
+        \item JSON is marked like a JavaScript object with \texttt{\{\}} for objects and \texttt{[]} for arrays.
+        \item Key-value pairs are separated by colons (\texttt{:}), and multiple pairs are separated by commas (\texttt{,}).
+    \end{itemize}
+    \item \textbf{Types of JSON Values}:
+    \begin{itemize}
+        \item JSON values can include: Objects, Strings, Numbers, Booleans, Null, and Arrays.
+    \end{itemize}
+    \item \textbf{Rules}:
+    \begin{itemize}
+        \item Keys (names) must always be in double quotes.
+        \item Values only require quotes depending on the datatype (e.g., strings).
+        \item Escape characters like backslashes and quotes must be used appropriately.
+    \end{itemize}
+    \item \textbf{Data Types}:
+    \begin{itemize}
+        \item \textbf{Numbers}: Can be integers, decimals, negative numbers, or exponents, and do not require quotes.
+        \item \textbf{Boolean}: Values must be lowercase (\texttt{true} or \texttt{false}).
+        \item \textbf{Null}: Indicates no value (not the same as undefined in JavaScript).
+    \end{itemize}
+    \item \textbf{Arrays}:
+    \begin{itemize}
+        \item Always enclosed in square brackets (\texttt{[]}), containing valid JSON data types.
+    \end{itemize}
+    \item \textbf{Nested Objects}:
+    \begin{itemize}
+        \item JSON allows objects to be nested within other objects, using a tree-like structure.
+    \end{itemize}
+    \item \textbf{Portability Considerations}:
+    \begin{itemize}
+        \item Avoid special characters or spaces in key names for compatibility across platforms.
+    \end{itemize}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- this is the info.plist for the Interface Builder from Xcode-->
+<plist version="1.0">
+<dict>
+ <key>UIInterfaceOrientations_iphone</key>
+ <array>
+  <string>UIOrientationLandscapeRight</string>
+  <string>UIOrientationLandscapeLeft</string>
+  <string>UIOrientationPortrait</string>
+ </array>
+ <key>UIInterfaceOrientations~ipad</key>
+ <array>
+  <string>UIOrientationLandscapeRight</string>
+  <string>UIOrientationLandscapeLeft</string>
+  <string>UIOrientationPortraitUpsideDown</string>
+  <string>UIOrientationPortrait</string>
+ </array>
+ <key>CFBundleDevelopmentRegion</key>
+ <string>en</string>
+ <key>CFBundleExecutable</key>
+ <string>$(EXECUTABLE_NAME)</string>
+ <key>CFBundleIdentifier</key>
+ <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+</dict>
+</plist>

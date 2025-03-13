@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mainInventory>
+    <title>Ottoman Empire Furniture Inventory</title>
+    <lastInventoried>2021-05-02</lastInventoried>
+    <furniture>
+        <type>Sofa</type>
+        <style>Flared Arm</style>
+        <manufacturer>Ibiza</manufacturer>
+        <length>80.3 Inches</length>
+        <color>Cranberry</color>
+        <price currency="CDN">539.99</price>
+        <shippingCosts>Free</shippingCosts>
+    </furniture>
+    <furniture>
+        <type>Sofa</type>
+        <style>Round Arm Sleeper</style>
+        <manufacturer>George Oliver</manufacturer>
+        <length>77 Inches</length>
+        <color>Pumpkin</color>
+        <price currency="CDN">529.99</price>
+        <shippingCosts>45.99</shippingCosts>
+    </furniture>
+    
+    <furniture>
+        <type>Sofa</type>
+        <style>Faux Leather Tufted Back Convertible</style>
+        <manufacturer>Mercury Row</manufacturer>
+        <length>193 Inches</length>
+        <color>White</color>
+        <price currency="CDN">569.99</price>
+        <shippingCosts>Free</shippingCosts>
+    </furniture>
+    
+    <furniture>
+        <type>Sofa</type>
+        <style>Faux Leather Wide Pillow Top Arm</style>
+        <manufacturer>Wrought Studio</manufacturer>
+        <length>60 Inches</length>
+        <color>White/Black</color>
+        <price currency="CDN">386.99</price>
+        <shippingCosts>Free</shippingCosts>
+    </furniture>
+    
+    <furniture>
+        <type>Sofa</type>
+        <style>Square Arm Sofa</style>
+        <manufacturer>Corrigan Studio</manufacturer>
+        <length>72 Inches</length>
+        <color>Gold</color>
+        <price currency="US">619.99</price>
+        <shippingCosts>64.22</shippingCosts>
+    </furniture>
+</mainInventory>

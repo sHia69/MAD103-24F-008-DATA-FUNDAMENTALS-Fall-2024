@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals }
+\fancyhead[R]{Instructor: Sodiq Shofoluwe  \thepage}
+
+\begin{document}
+
+\title{Notes on Booleans}
+\author{Hia Al Saleh}
+\date{September 16th, 2024}
+
+\maketitle
+\tableofcontents
+\newpage 
+
+\section{Booleans}
+
+\begin{itemize}
+    \item \textbf{Definition}: Used to store truth values.
+    \item \textbf{Type Name}: BOOLEAN.
+    \item \textbf{Values}: TRUE, FALSE, UNKNOWN.
+    \item \textbf{Null Value}: Equivalent to UNKNOWN.
+    \item \textbf{Special Case in Some Languages}:
+    \begin{itemize}
+        \item MySQL uses a tinyInt value of 0 or 1 for Boolean values.
+        \item 1 = true.
+        \item 0 = false.
+    \end{itemize}
+\end{itemize}
+\section{Character Data Types}
+
+\begin{itemize}
+    \item \textbf{Definition}: Character string (string) types are used to represent text.
+    \item \textbf{Strings}:
+    \begin{itemize}
+        \item Ordered sequences of zero or more characters.
+        \item Length can be fixed or varying.
+        \item Case sensitive.
+        \item In SQL statements, strings are surrounded by single quotes.
+        \item The length of a string is an integer between 0 and the specified length.
+    \end{itemize}
+    \item \textbf{CHAR}:
+    \begin{itemize}
+        \item Also called CHARACTER.
+        \item Requires a specified width (number of characters).
+        \item Example: CHAR(50) allows a character string of up to 50 characters.
+        \item Excess characters are truncated from the right.
+        \item Fixed-length strings are sorted and manipulated faster than variable-length strings.
+    \end{itemize}
+    \item \textbf{VARCHAR}:
+    \begin{itemize}
+        \item Varying character type requires a specified width.
+        \item Uses only as much storage space as required by the object, up to the set amount.
+        \item Example: VARCHAR(50).
+    \end{itemize}
+    \item \textbf{When to Use String or Numeric}:
+    \begin{itemize}
+        \item Consider if arithmetic calculations will be performed on the values.
+        \item Example: US Postal codes (all digits, fixed length) are best stored as characters.
+        \item Example: Telephone numbers (all digits, fixed length) are best stored as characters.
+    \end{itemize}
+\end{itemize}
+\section{Datatypes}
+
+\begin{itemize}
+    \item \textbf{Definition}: Indicates the type of data that can be stored in a field.
+    \item \textbf{Column Data Type}: Each column has a single data type.
+    \item \textbf{Sort Order}:
+    \begin{itemize}
+        \item The data type affects the column's sort order.
+        \item Example: Values 10, 1, 2 are sorted as 1, 2, 10 for integers.
+        \item For strings, they are sorted as 1, 10, 2 (lexicographical ordering).
+    \end{itemize}
+    \item \textbf{Categories of Data}:
+    \begin{itemize}
+        \item Numeric
+        \item Character
+        \item Temporal (date and time)
+    \end{itemize}
+\end{itemize}
+\section{Large Objects}
+
+\begin{itemize}
+    \item \textbf{CLOB and BLOB}:
+    \begin{itemize}
+        \item When the character column is larger than the maximum VARCHAR (255), a large-object character type is required.
+        \item \textbf{CLOB} (Character Large Object): Used to store large amounts of character data.
+        \item \textbf{BLOB} (Binary Large Object): Used to store binary data such as images, sound, and video.
+        \item Note: MySQL implements TEXT instead of CLOB.
+    \end{itemize}
+\end{itemize}
+\section{Numeric Data Types}
+
+\begin{itemize}
+    \item \textbf{Types}:
+    \begin{itemize}
+        \item \textbf{Exact}:
+        \begin{itemize}
+            \item INTEGER: Holds both positive and negative whole numbers. Range: -2,147,483,648 to 2,147,483,647.
+            \item SMALLINT: Smaller range of integers. Range: -31,768 to 31,767.
+            \item BIGINT: Larger range than INTEGER. Range: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807.
+            \item MEDIUMINT (MySQL): Range: -8,388,608 to 8,388,608.
+            \item TINYINT (MySQL and SQL): Range: -128 to 127.
+            \item DECIMAL/NUMERIC: Made up of precision (total number of digits) and scale (digits to the right of the decimal point). Example: NUMERIC(5,2) can store 123.89.
+        \end{itemize}
+        \item \textbf{Approximate}:
+        \begin{itemize}
+            \item FLOAT: Used for floating point numbers. Example: FLOAT(size, d) where size is the total number of digits and d is the number of digits to the right of the decimal point.
+        \end{itemize}
+    \end{itemize}
+    \item \textbf{Considerations}:
+    \begin{itemize}
+        \item Exact types ensure the value retrieved is exactly the same as stored.
+        \item Approximate types may retrieve a value very close to the original.
+        \item Calculations involving only integers are faster than those involving decimal and floating point numbers.
+    \end{itemize}
+\end{itemize}
+\section{Temporal Data Types}
+
+\begin{itemize}
+    \item \textbf{DATE}:
+    \begin{itemize}
+        \item Used to store date values from the Common Era calendar (standard 365-day Gregorian calendar).
+        \item Components: Year, Month, Day.
+        \item Input formats vary across database systems.
+        \item Recommended format: YYYY-MM-DD (recognized by all database systems).
+    \end{itemize}
+    \item \textbf{TIME}:
+    \begin{itemize}
+        \item Used to store time values.
+        \item Differences exist between input format, storage format, and display format.
+        \item Used for recurring clock times and durations.
+        \item Based on the 24-hour clock (military time).
+        \item Format: hh:mm:ss (colons separate the parts of time).
+        \item In MS ACCESS, surround datetime literals with \# (e.g., \#2006-03-17\#).
+    \end{itemize}
+    \item \textbf{Time Stamp}:
+    \begin{itemize}
+        \item Consists of both a date and time component.
+        \item Used when an event has a specific date and time.
+    \end{itemize}
+\end{itemize}
+\end{document}

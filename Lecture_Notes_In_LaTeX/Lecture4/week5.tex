@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals }
+\fancyhead[R]{Instructor: Sodiq Shofoluwe \thepage}
+
+\begin{document}
+
+\title{Notes on Booleans and SQL Data Fundamentals}
+\author{Hia Al Saleh}
+\date{September 30th, 2024}
+\maketitle
+\tableofcontents
+\newpage 
+
+\section{Introduction}
+SQL (Structured Query Language) is the standard programming language for creating, updating, and retrieving information from databases. It allows the definition, manipulation, and control of data. In this document, we cover fundamental SQL syntax, Boolean logic, data definition, and constraint management in databases.
+
+\section{SQL Overview}
+\textbf{SQL} is a declarative programming language, meaning you describe what you want, and the database management system (DBMS) determines how to execute it. SQL can be used both interactively or embedded in other programming languages like PHP.
+
+\subsection{Key Characteristics of SQL}
+\begin{itemize}
+    \item \textbf{Declarative}: You specify the outcome you want, not how to achieve it.
+    \item \textbf{Interactive}: Commands are issued directly to the DBMS and results are displayed.
+    \item \textbf{Standardized}: Defined by an international standards group, ensuring wide compatibility.
+\end{itemize}
+
+\section{SQL Syntax Conventions}
+\begin{itemize}
+    \item Each SQL statement begins on a new line.
+    \item Keywords are case insensitive, but generally written in uppercase.
+    \item SQL statements are terminated with a semicolon, though some DBMS like MySQL do not always require this.
+\end{itemize}
+
+\subsection{Example of SQL Syntax}
+\begin{verbatim}
+-- Retrieve authors from New York
+SELECT au_fname, au_lname
+FROM authors
+WHERE state = 'NY'
+ORDER BY au_lname;
+\end{verbatim}
+
+This query selects authors whose state is New York, displaying their first and last names.
+
+\section{Unique Identifiers}
+Unique identifiers in SQL are used to generate primary key values, ensuring each row in a table is unique. SQL supports identity columns, which automatically generate unique values.
+
+\subsection{Example: Creating Tables}
+\begin{verbatim}
+CREATE TABLE titles (
+    title_id CHAR(3),
+    title_name VARCHAR(40),
+    type VARCHAR(10),
+    pub_id CHAR(3),
+    pages INTEGER,
+    price DECIMAL(5,2),
+    pubdate DATE
+);
+\end{verbatim}
+
+This SQL statement creates a table called \texttt{titles} with columns for the title ID, name, type, publisher ID, pages, price, and publication date.
+
+\section{Data Definition Language (DDL)}
+DDL is used to create, modify, and remove database objects like tables and columns. The primary commands in DDL are \texttt{CREATE}, \texttt{ALTER}, and \texttt{DROP}.
+
+\subsection{Table and Column Naming Conventions}
+\begin{itemize}
+    \item Names must begin with a letter and contain only letters, digits, and underscores.
+    \item No spaces or special characters are allowed.
+    \item Avoid using SQL reserved keywords as names (e.g., \texttt{SELECT}, \texttt{SUM}).
+\end{itemize}
+
+\section{Constraints}
+Constraints in SQL define rules for the data that can be inserted into a table.
+
+\subsection{Common Constraints}
+\begin{itemize}
+    \item \textbf{NOT NULL}: Prevents null values from being inserted into a column.
+    \item \textbf{PRIMARY KEY}: Uniquely identifies each row in a table.
+    \item \textbf{FOREIGN KEY}: Enforces a relationship between two tables.
+    \item \textbf{UNIQUE}: Ensures no duplicate values are inserted into a column.
+    \item \textbf{CHECK}: Restricts the values that can be inserted into a column based on a condition.
+\end{itemize}
+
+\subsection{Example: Defining Constraints}
+\begin{verbatim}
+CREATE TABLE publishers (
+    pub_id CHAR(3) PRIMARY KEY,
+    pub_name VARCHAR(20) NOT NULL,
+    city VARCHAR(15),
+    state CHAR(2),
+    country VARCHAR(15) NOT NULL
+);
+\end{verbatim}
+This creates a table with a primary key constraint on the \texttt{pub\_id} column, and enforces that the \texttt{pub\_name} and \texttt{country} columns cannot be null.
+
+\section{Working with Null Values}
+Null values in SQL represent missing or unknown data. While nulls can simplify representing missing data, they complicate query logic and should be avoided if possible.
+
+\subsection{Example: Forbidding Nulls}
+\begin{verbatim}
+CREATE TABLE authors (
+    au_id CHAR(3) NOT NULL,
+    au_fname VARCHAR(15) NOT NULL,
+    au_lname VARCHAR(15) NOT NULL
+);
+\end{verbatim}
+This example ensures that the \texttt{au\_id}, \texttt{au\_fname}, and \texttt{au\_lname} columns cannot contain null values.
+
+\section{Primary Keys and Foreign Keys}
+\textbf{Primary Keys} uniquely identify each row in a table, while \textbf{Foreign Keys} create relationships between tables.
+
+\subsection{Example: Foreign Key Definition}
+\begin{verbatim}
+CREATE TABLE royalties (
+    title_id CHAR(3) NOT NULL PRIMARY KEY,
+    pub_id CHAR(3) NOT NULL,
+    CONSTRAINT fk_pub FOREIGN KEY (pub_id) REFERENCES publishers(pub_id)
+);
+\end{verbatim}
+This SQL defines a foreign key relationship between the \texttt{royalties} and \texttt{publishers} tables, ensuring that the \texttt{pub\_id} in \texttt{royalties} matches a valid \texttt{pub\_id} in \texttt{publishers}.
+
+\section{UNIQUE Constraint}
+A \textbf{UNIQUE} constraint ensures that a column contains no duplicate values. It is similar to a primary key, except that a table can have multiple unique constraints and they can contain nulls.
+
+\subsection{Example: Unique Constraint}
+\begin{verbatim}
+CREATE TABLE titles (
+    title_id CHAR(3) NOT NULL PRIMARY KEY,
+    title_name VARCHAR(40) NOT NULL UNIQUE
+);
+\end{verbatim}
+This ensures that each \texttt{title\_name} in the \texttt{titles} table is unique.
+
+\section{CHECK Constraint}
+A \textbf{CHECK} constraint limits the values that can be inserted into a column based on a logical condition.
+
+\subsection{Example: Check Constraint}
+\begin{verbatim}
+CREATE TABLE cartitems (
+    cart_id INTEGER NOT NULL,
+    qty SMALLINT NOT NULL CHECK (qty <= 10)
+);
+\end{verbatim}
+This constraint ensures that the quantity (\texttt{qty}) cannot exceed 10.
+
+\section{Temporary Tables}
+\textbf{Temporary Tables} are used to store intermediate results for complex queries and are dropped automatically at the end of a session.
+
+\subsection{Example: Creating a Temporary Table}
+\begin{verbatim}
+CREATE TEMPORARY TABLE temp_authors (
+    au_id CHAR(3),
+    au_fname VARCHAR(15),
+    au_lname VARCHAR(15)
+);
+\end{verbatim}
+
+\section{Altering Tables}
+\texttt{ALTER TABLE} is used to modify an existing table by adding, modifying, or deleting columns and constraints.
+
+\subsection{Example: Altering a Table}
+\begin{verbatim}
+ALTER TABLE authors ADD COLUMN email VARCHAR(25);
+\end{verbatim}
+
+\section{Dropping Tables}
+The \texttt{DROP TABLE} command is used to permanently remove a table from the database.
+
+\subsection{Example: Dropping a Table}
+\begin{verbatim}
+DROP TABLE authors;
+\end{verbatim}
+
+\section{Conclusion}
+SQL offers robust functionality for managing database structures and ensuring data integrity through constraints and proper table design. By following SQL syntax rules and utilizing constraints such as \texttt{NOT NULL}, \texttt{PRIMARY KEY}, \texttt{FOREIGN KEY}, and \texttt{CHECK}, databases can be effectively managed and maintained.
+
+\end{document}

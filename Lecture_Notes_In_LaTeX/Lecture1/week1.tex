@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals - Fall 2024}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe  \thepage}
+
+
+\title{XML and Data Fundamentals Notes}
+\author{Hia Al Saleh}
+\date{September 5th,2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage 
+
+\section{Introduction to XML}
+\begin{itemize}
+    \item XML stands for \textbf{Extensible Markup Language}, a technology used for data description and structuring.
+    \item It is not a language itself but a standard for creating languages that meet XML criteria.
+    \item XML files are text files with the \texttt{.xml} extension and are maintained by the World Wide Web Consortium (W3C).
+\end{itemize}
+
+\section{XML Document Structure Rules}
+\begin{enumerate}
+    \item Tags are case-sensitive.
+    \item Opening tags must have corresponding closing tags.
+    \item Tags must be properly nested.
+    \item Attribute values must be quoted.
+    \item The root element must be unique and required.
+\end{enumerate}
+
+\section{Basic XML Example}
+\begin{verbatim}
+<books>
+    <book>
+        <title>Cold Days</title>
+        <author>Jim Butcher</author>
+    </book>
+</books>
+\end{verbatim}
+
+\section{XML Declaration}
+\begin{itemize}
+    \item XML declarations include the version and character encoding, e.g., \texttt{<?xml version="1.0" encoding="UTF-8"?>}.
+    \item The \texttt{standalone} attribute indicates if the document relies on external files.
+\end{itemize}
+
+\section{Character Data and Entities}
+\begin{itemize}
+    \item Predefined entities in XML: \texttt{\&lt;} (represents \texttt{<}), \texttt{\&gt;} (represents \texttt{>}), \texttt{\&amp;} (represents \texttt{\&}), \texttt{\&apos;} (represents \texttt{'}) and \texttt{\&quot;} (represents \texttt{"}).
+    \item CDATA sections are used to include large blocks of unparsed text: \texttt{<![CDATA[...]]>}.
+\end{itemize}
+
+\section{Data Fundamentals}
+\subsection{Definition of Data}
+\begin{itemize}
+    \item Factual information used for reasoning or calculation.
+    \item Data can be transmitted or processed digitally.
+\end{itemize}
+
+\subsection{Popular Data Formats}
+\begin{itemize}
+    \item XML (Extensible Markup Language).
+    \item JSON (JavaScript Object Notation).
+\end{itemize}
+
+\section{Course Information}
+\subsection{Important Dates}
+\begin{itemize}
+    \item Start Date: September 3, 2024
+    \item End Date: December 20, 2024
+    \item Add/Drop Deadline: September 16, 2024
+    \item Thanksgiving Break: October 14, 2024
+    \item Exam Week: December 9-13, 2024
+\end{itemize}
+
+\subsection{Grading Breakdown}
+\begin{itemize}
+    \item Assignments: 30\% total, with each worth 2.5\%.
+    \item Quizzes: 10\% total, with each quiz worth 1\%.
+\end{itemize}
+
+\section{Email Etiquette}
+\begin{itemize}
+    \item Use professional language in all communication.
+    \item Include your full name, student number, and course section in all emails.
+    \item Always use your college email account for correspondence.
+\end{itemize}
+
+\end{document}

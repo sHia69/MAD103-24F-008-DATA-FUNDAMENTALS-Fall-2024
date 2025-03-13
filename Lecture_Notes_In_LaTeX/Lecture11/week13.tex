@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe \thepage}
+
+\begin{document}
+
+\title{Database Design and Normalization Notes}
+\author{Hia Al Saleh}
+\date{November 25th, 2024}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\subsection{Overview of the Relational Model}
+The relational model forms the foundation of modern database systems. It organizes data into relations, commonly referred to as tables, each representing a specific entity type. 
+
+\paragraph{Key Characteristics of a Table:}
+\begin{itemize}
+    \item A table contains rows and columns, where:
+    \begin{itemize}
+        \item \textbf{Rows:} Represent individual records or facts about an entity.
+        \item \textbf{Columns:} Represent attributes or properties of the entity.
+    \end{itemize}
+    \item Tables must have a unique name within the database.
+    \item Data items are stored at the intersection of rows and columns, ensuring a structured organization.
+\end{itemize}
+
+\paragraph{Example:} Consider a table called \texttt{Student}, which stores information about students:
+\begin{itemize}
+    \item Columns: \texttt{Student\_ID}, \texttt{Name}, \texttt{Date\_of\_Birth}.
+    \item Rows: Each row corresponds to a specific student and includes values for the attributes.
+\end{itemize}
+
+\subsection{Entities and Attributes}
+An \textbf{entity type} refers to a class of real-world objects, such as patients, movies, or invoices. Each entity type has attributes that define its properties. For example:
+\begin{itemize}
+    \item \textbf{Entity Type:} \texttt{Movie}
+    \item \textbf{Attributes:} \texttt{Title}, \texttt{Release Year}, \texttt{Director}.
+\end{itemize}
+
+\subsection{Rows and Columns in Detail}
+\paragraph{Columns (Attributes):}
+\begin{itemize}
+    \item Each column has a name and a \textbf{domain}, which defines the allowable data types and values.
+    \item Values in columns must be single-valued (atomic).
+    \item The order of columns in a table is unimportant.
+\end{itemize}
+
+\paragraph{Rows (Records):}
+\begin{itemize}
+    \item Each row describes a specific instance of the entity.
+    \item Rows must be unique and are identified using a \textbf{primary key}.
+    \item The order of rows is unimportant.
+\end{itemize}
+
+\section{Relationships}
+\subsection{Definition}
+A \textbf{relationship} is an association between tables established through common columns. Relationships ensure that data in different tables is interconnected, forming the backbone of a relational database.
+
+\subsection{Types of Relationships}
+\paragraph{One-to-One:}
+\begin{itemize}
+    \item Each row in Table A is associated with at most one row in Table B, and vice versa.
+    \item Example: A table of \texttt{Employees} linked to a table of \texttt{Company Cars}.
+    \item Implementation: The primary key of one table also acts as the foreign key in the related table.
+\end{itemize}
+
+\paragraph{One-to-Many:}
+\begin{itemize}
+    \item A single row in Table A can be linked to multiple rows in Table B.
+    \item Example: A table of \texttt{Authors} linked to a table of \texttt{Books}.
+    \item Implementation: The primary key of Table A is included as a foreign key in Table B.
+\end{itemize}
+
+\paragraph{Many-to-Many:}
+\begin{itemize}
+    \item Rows in Table A can relate to multiple rows in Table B, and vice versa.
+    \item Example: A table of \texttt{Students} linked to a table of \texttt{Courses}.
+    \item Implementation: A junction table is created to store the primary keys of both tables.
+\end{itemize}
+
+\section{Normalization}
+Normalization is the process of organizing data in a database to reduce redundancy, avoid update anomalies, and maintain consistency.
+
+\subsection{First Normal Form (1NF)}
+\paragraph{Definition:}
+A table is in 1NF if it has no repeating groups and all its columns contain atomic (indivisible) values.
+
+\paragraph{Steps to Achieve 1NF:}
+\begin{itemize}
+    \item Eliminate repeating groups by storing each value in its own row.
+    \item Ensure each column contains a single value.
+\end{itemize}
+
+\paragraph{Example:}
+\textbf{Unnormalized Table:}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+Student ID & Student Name & Courses Enrolled \\ \hline
+1 & John & Math, Science \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{1NF Table:}
+\begin{tabular}{|l|l|l|}
+\hline
+Student ID & Student Name & Course \\ \hline
+1 & John & Math \\ \hline
+1 & John & Science \\ \hline
+\end{tabular}
+
+\subsection{Second Normal Form (2NF)}
+\paragraph{Definition:}
+A table is in 2NF if:
+\begin{itemize}
+    \item It is in 1NF.
+    \item Every non-key attribute depends on the entire primary key.
+\end{itemize}
+
+\paragraph{Steps to Achieve 2NF:}
+\begin{itemize}
+    \item Identify attributes that depend only on a part of a composite key.
+    \item Create separate tables for these attributes.
+\end{itemize}
+
+\paragraph{Example:}
+Splitting a table of \texttt{Students} and \texttt{Courses} into separate \texttt{Student} and \texttt{Course} tables.
+
+\subsection{Third Normal Form (3NF)}
+\paragraph{Definition:}
+A table is in 3NF if:
+\begin{itemize}
+    \item It is in 2NF.
+    \item No attribute depends on a non-key attribute (transitive dependency).
+\end{itemize}
+
+\paragraph{Steps to Achieve 3NF:}
+\begin{itemize}
+    \item Identify attributes dependent on non-key attributes.
+    \item Move these attributes into a new table.
+\end{itemize}
+
+\paragraph{Example:}
+Splitting a table of \texttt{Students}, \texttt{Courses}, and \texttt{Coordinators} into separate tables.
+
+\section{Conclusion}
+The relational model and normalization techniques are essential for designing efficient databases. By ensuring data integrity and minimizing redundancy, these principles lay the groundwork for scalable and maintainable database systems.
+
+\end{document}

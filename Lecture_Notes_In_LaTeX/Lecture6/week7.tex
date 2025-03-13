@@ -1,0 +1,102 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe \thepage}
+
+\begin{document}
+
+\title{SQL Query Basics and Data Retrieval Techniques}
+\author{Hia Al Saleh}
+\date{October 14th, 2024}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction to SQL Queries}
+SQL (Structured Query Language) is used to interact with relational databases. Basic query commands allow users to retrieve, filter, sort, and analyze data efficiently.
+
+\section{Basic Data Retrieval with \texttt{SELECT}}
+\subsection{\texttt{SELECT} Statement}
+The \texttt{SELECT} statement is used to retrieve specific columns from a table:
+\begin{verbatim}
+SELECT column1, column2 FROM tablename;
+\end{verbatim}
+\texttt{SELECT *} retrieves all columns.
+
+\subsection{Filtering Data with \texttt{WHERE}}
+The \texttt{WHERE} clause restricts results to rows that meet specific conditions:
+\begin{verbatim}
+SELECT column1 FROM tablename WHERE condition;
+\end{verbatim}
+Common operators include \texttt{=}, \texttt{<>} (not equal), \texttt{>}, \texttt{<}, \texttt{LIKE}, and \texttt{BETWEEN}.
+
+\subsection{Sorting Results with \texttt{ORDER BY}}
+\texttt{ORDER BY} arranges the output in ascending (\texttt{ASC}) or descending (\texttt{DESC}) order:
+\begin{verbatim}
+SELECT column1 FROM tablename ORDER BY column1 DESC;
+\end{verbatim}
+
+\section{Aggregate Functions for Data Analysis}
+SQL offers several aggregate functions to summarize data:
+\begin{itemize}
+    \item \texttt{COUNT()} - Counts non-\texttt{NULL} entries.
+    \item \texttt{SUM()} - Adds numeric values.
+    \item \texttt{AVG()} - Calculates average.
+    \item \texttt{MIN()} and \texttt{MAX()} - Find lowest and highest values.
+\end{itemize}
+Example:
+\begin{verbatim}
+SELECT COUNT(column) FROM tablename WHERE condition;
+\end{verbatim}
+
+\section{Grouping Results with \texttt{GROUP BY} and \texttt{HAVING}}
+\subsection{\texttt{GROUP BY} Clause}
+\texttt{GROUP BY} organizes rows into groups, allowing aggregate functions on each group:
+\begin{verbatim}
+SELECT column1, COUNT(*) FROM tablename GROUP BY column1;
+\end{verbatim}
+
+\subsection{\texttt{HAVING} Clause}
+The \texttt{HAVING} clause filters groups created by \texttt{GROUP BY}:
+\begin{verbatim}
+SELECT column1, COUNT(*) FROM tablename
+GROUP BY column1
+HAVING COUNT(*) > 10;
+\end{verbatim}
+
+\section{Joins for Combining Tables}
+\subsection{Types of Joins}
+\begin{itemize}
+    \item \textbf{INNER JOIN}: Returns matching rows between tables.
+    \item \textbf{LEFT JOIN}: Returns all rows from the left table and matching rows from the right.
+    \item \textbf{RIGHT JOIN}: Returns all rows from the right table and matching rows from the left.
+    \item \textbf{FULL JOIN}: Returns all rows when there is a match in one of the tables.
+\end{itemize}
+Example:
+\begin{verbatim}
+SELECT a.column1, b.column2 FROM table1 AS a
+INNER JOIN table2 AS b ON a.id = b.id;
+\end{verbatim}
+
+\section{Subqueries}
+A subquery is a query nested within another query, often in the \texttt{WHERE} clause:
+\begin{verbatim}
+SELECT column1 FROM tablename
+WHERE column2 = (SELECT MAX(column2) FROM tablename2);
+\end{verbatim}
+
+\section{Common SQL Clauses and Operators}
+\begin{itemize}
+    \item \texttt{DISTINCT}: Removes duplicate rows.
+    \item \texttt{IN}: Checks if a value is within a list of values.
+    \item \texttt{LIKE} with Wildcards (\texttt{\%}, \texttt{\_}): For pattern matching.
+    \item \texttt{BETWEEN}: Filters within a range.
+    \item Logical operators: \texttt{AND}, \texttt{OR}, \texttt{NOT}.
+\end{itemize}
+
+\end{document}

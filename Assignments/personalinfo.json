@@ -1,0 +1,19 @@
+[
+    {
+        "Name": "Hia Al Saleh",
+        "StudentID": "0868639",
+        "City": "Windsor",
+        "Age": 19,
+        "TopMovies": [
+            "The Grudge",
+            "The Cat",
+            "Hidden Figures"
+        ],
+        "TopFoods": [
+            "Dolma",
+            "Sushi",
+            "Pizza"
+        ],
+        "LovesCats": true
+    }
+]

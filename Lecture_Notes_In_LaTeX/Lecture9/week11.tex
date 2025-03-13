@@ -1,0 +1,156 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe \thepage}
+
+\begin{document}
+
+\title{Subqueries in SQL}
+\author{Hia Al Saleh}
+\date{November 11th, 2024}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+The key component of databases is being able to optimize the data and reduce errors and redundancy. We create tables that hold information that is related, and the relationship between one table and another is represented by a \textbf{foreign key}, which is another table’s primary key. This allows a column's value to provide a lookup in another table to retrieve additional information.
+
+\section{Subqueries Overview}
+With subqueries, we use the results of one query to filter another table’s results. For example, if we want to know which supplier provided us with bread, we would query the \texttt{products} table to find suppliers providing bread.
+
+\begin{verbatim}
+SELECT supplierID
+FROM products
+WHERE productName LIKE '%bread%';
+\end{verbatim}
+
+\textbf{Important note:} We asked for a single column of values, just the \texttt{supplierID}. Avoid creating a query that returns multiple columns.
+
+\begin{verbatim}
+SELECT supplierID, productName
+FROM products
+WHERE productName LIKE '%bread%';
+\end{verbatim}
+
+\section{Ensuring Unique Results}
+To ensure there are no duplicates in the results, use the \texttt{DISTINCT} keyword:
+
+\begin{verbatim}
+SELECT DISTINCT supplierID
+FROM products
+WHERE productName LIKE '%bread%';
+\end{verbatim}
+
+We can now use these IDs to look up suppliers with specific companies.
+
+\begin{verbatim}
+SELECT * 
+FROM suppliers
+WHERE id IN (8,2,6);
+\end{verbatim}
+
+\section{Simplifying Statements with Subqueries}
+Subqueries allow for simplification by combining multiple statements into one. For instance:
+
+\begin{verbatim}
+SELECT * 
+FROM suppliers
+WHERE id IN (SELECT DISTINCT supplierID
+FROM products
+WHERE productName LIKE '%bread%');
+\end{verbatim}
+
+The \texttt{IN} keyword checks if a value matches any value in a list, while \texttt{NOT IN} can be used to reverse the results.
+
+\subsection{Using Multiple Subqueries}
+Subqueries can be nested, following the same rules as a single subquery. Key differences include:
+\begin{itemize}
+    \item Always enclose a subquery in parentheses.
+    \item Do not end a subquery with a semicolon.
+    \item Avoid using \texttt{ORDER BY} within a subquery.
+\end{itemize}
+
+Both queries must include the necessary tables to ensure columns appear in the final result, and subqueries may return an empty table.
+
+\section{Aggregate Functions and Subqueries}
+Subqueries are particularly useful with aggregate functions. For example, to find the cheapest product:
+
+\begin{verbatim}
+SELECT * 
+FROM products
+WHERE price IN (SELECT MIN(price) FROM products);
+\end{verbatim}
+
+\subsection{Inner and Outer Subqueries}
+An \textit{inner subquery} is the nested query, while an \textit{outer subquery} is the statement containing the subquery. A simple subquery evaluates the inner subquery once and provides its result to the outer query.
+
+\begin{verbatim}
+SELECT * 
+FROM products
+WHERE price IN (SELECT MAX(price) FROM products);
+\end{verbatim}
+
+\section{Excluding Certain Results}
+To find products that are not from Ontario:
+
+\begin{verbatim}
+SELECT * 
+FROM products
+WHERE supplierID NOT IN (
+SELECT id 
+FROM suppliers 
+WHERE province = 'Ontario');
+\end{verbatim}
+
+\section{Explicitly Declaring Column Names in Subqueries}
+Column names in a subquery can be explicitly declared, though implicit qualifications work when column names match across tables at the same nesting level.
+
+\begin{verbatim}
+SELECT pub_name
+FROM publishers
+WHERE publishers.pub_id IN 
+(SELECT titles.pub_id
+FROM titles WHERE type='biography');
+\end{verbatim}
+
+\section{Scalar Subqueries as Column Expressions}
+Subqueries that are used as column expressions must return a single value. This can be achieved through aggregate functions or restrictive \texttt{WHERE} conditions.
+
+For example, to list each product with its price and the average price:
+
+\begin{verbatim}
+SELECT productName, price, (SELECT AVG(price) FROM products)
+FROM products;
+\end{verbatim}
+
+\section{Subqueries in Filtering Clauses}
+Subqueries can be used as filters in \texttt{WHERE} or \texttt{HAVING} clauses with comparison operators (e.g., =, <>, <, etc.).
+
+\textbf{Rules:}
+\begin{itemize}
+    \item The \texttt{SELECT} clause should only include a single expression or column name.
+    \item Compared values must have matching data types or be implicitly convertible.
+    \item The subquery must return a single value, often through an aggregate.
+\end{itemize}
+
+\subsection{Example: Matching Province}
+To display customers in the same province as "Thompson Inc":
+
+\begin{verbatim}
+SELECT * FROM customers
+WHERE province = 
+(SELECT province 
+FROM suppliers WHERE companyName = 'Thompson Inc');
+\end{verbatim}
+
+This query returns a single value, making it suitable for a subquery in a \texttt{WHERE} clause.
+
+\section{Conclusion}
+Subqueries are a powerful tool in SQL, allowing for complex queries that streamline data retrieval, especially when combined with aggregate functions and nested queries. Proper usage of subqueries enhances SQL's efficiency and readability, enabling advanced data manipulation and filtering.
+
+\end{document}

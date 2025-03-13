@@ -1,0 +1,134 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe \thepage}
+
+\begin{document}
+
+\title{Aggregate Functions in SQL}
+\author{Hia Al Saleh}
+\date{October 28th, 2024}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction to Aggregate Functions}
+Aggregate functions, also called \textbf{set functions}, operate on a group of values to produce a single, summarizing value. Aggregates can be applied to:
+\begin{itemize}
+    \item All rows in a table
+    \item Only specific rows, using a \texttt{WHERE} clause
+    \item Rows grouped by a \texttt{GROUP BY} clause
+\end{itemize}
+
+Non-aggregate queries process each row independently, while aggregate queries process the table as a whole to construct new rows.
+
+\section{Types of Aggregate Functions}
+\subsection{COUNT}
+The \texttt{COUNT} function counts the number of records that match a certain criterion.
+\begin{itemize}
+    \item \texttt{COUNT(*)} - returns the total number of rows in a table, including duplicates and \texttt{NULL}s.
+    \item \texttt{COUNT(column\_name)} - returns the number of non-\texttt{NULL} values in the specified column.
+\end{itemize}
+Example:
+\begin{verbatim}
+SELECT COUNT(*) AS Num_Books FROM titles;
+\end{verbatim}
+
+\subsection{MIN and MAX}
+\begin{itemize}
+    \item \texttt{MIN(column\_name)} - returns the minimum value in the specified column.
+    \item \texttt{MAX(column\_name)} - returns the maximum value.
+\end{itemize}
+These functions work with character, numeric, and datetime types. Note that \texttt{DISTINCT} has no meaning in \texttt{MIN} and \texttt{MAX}. Examples:
+\begin{verbatim}
+SELECT MIN(dateOrdered) FROM orders;
+SELECT MAX(shippedTo) FROM orders;
+\end{verbatim}
+
+\subsection{SUM}
+The \texttt{SUM(column\_name)} function calculates the sum of numeric values in the specified column.
+\begin{itemize}
+    \item It works only with numeric data types.
+    \item \texttt{NULL} values are ignored.
+    \item If there are no rows to sum, it returns \texttt{NULL} (not zero).
+\end{itemize}
+Example:
+\begin{verbatim}
+SELECT SUM(price) FROM carInventory WHERE qtyInStock = 1;
+\end{verbatim}
+
+\subsection{AVG}
+The \texttt{AVG(column\_name)} function calculates the average of numeric values in the specified column.
+\begin{itemize}
+    \item Works only on numeric data types.
+    \item If no rows match, it returns \texttt{NULL}.
+\end{itemize}
+Example:
+\begin{verbatim}
+SELECT AVG(price) FROM carInventory WHERE make = 'Mazda';
+\end{verbatim}
+
+\section{Other Considerations with Aggregate Functions}
+\begin{itemize}
+    \item \textbf{Ignoring \texttt{NULL}s}: All aggregate functions except \texttt{COUNT(*)} ignore \texttt{NULL} values.
+    \item \textbf{Aliases}: Use aliases to provide meaningful names for aggregate results in the \texttt{SELECT} clause.
+\end{itemize}
+
+\section{Restrictions on Aggregate Functions}
+\begin{itemize}
+    \item Aggregate functions cannot be used in the \texttt{WHERE} clause. Attempting to use one will result in an error.
+    \item You cannot mix non-aggregate and aggregate columns directly in the \texttt{SELECT} clause without using a \texttt{GROUP BY}.
+    \item Nested aggregate functions are not allowed. For example:
+    \begin{verbatim}
+    SELECT SUM(AVG(sales)) FROM titles;
+    \end{verbatim}
+    \item Subqueries cannot be used within aggregate expressions.
+\end{itemize}
+
+\section{Using \texttt{GROUP BY} with Aggregate Functions}
+The \texttt{GROUP BY} clause is used to divide a table into groups and apply aggregate functions to each group. The database processes rows by:
+\begin{itemize}
+    \item Gathering all information from the \texttt{FROM} clause
+    \item Filtering by the \texttt{WHERE} clause, if present
+    \item Aggregating the rows into groups
+\end{itemize}
+Only grouped rows can be used in the \texttt{SELECT} clause. Examples:
+\begin{verbatim}
+SELECT make, COUNT(*) AS numberOf
+FROM carInventory
+GROUP BY make;
+
+SELECT make, modelYear, COUNT(*) AS numberOf
+FROM carInventory
+GROUP BY make, modelYear;
+\end{verbatim}
+
+\section{DISTINCT with Aggregate Functions}
+\texttt{DISTINCT} can be used to eliminate duplicate values within aggregate functions, but it’s not meaningful with \texttt{MIN} and \texttt{MAX}. Example:
+\begin{verbatim}
+SELECT COUNT(DISTINCT make) FROM carInventory;
+\end{verbatim}
+
+\section{\texttt{HAVING} Clause}
+The \texttt{HAVING} clause filters results after aggregation, working similarly to the \texttt{WHERE} clause but applying to aggregated data. It is optional and used only with \texttt{GROUP BY}. Rows removed by the \texttt{WHERE} clause are not available to the \texttt{HAVING} clause.
+\begin{verbatim}
+SELECT make, SUM(price) AS totalPrice
+FROM carInventory
+GROUP BY make
+HAVING SUM(price) > 2000000;
+\end{verbatim}
+
+\section{Summary of Aggregate Function Usage}
+Aggregate functions enable summarizing data in SQL tables:
+\begin{itemize}
+    \item \texttt{COUNT}, \texttt{SUM}, and \texttt{AVG} for numeric summaries.
+    \item \texttt{MIN} and \texttt{MAX} for finding boundary values.
+\end{itemize}
+\texttt{GROUP BY} and \texttt{HAVING} clauses allow further control and filtering of results at the group level, making aggregate functions versatile tools in data summarization.
+
+\end{document}

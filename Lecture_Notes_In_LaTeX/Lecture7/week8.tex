@@ -1,0 +1,135 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe \thepage}
+
+\begin{document}
+
+\title{Functions and Date Operations in SQL}
+\author{Hia Al Saleh}
+\date{October 21st, 2024}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Date Functions}
+\subsection{CURDATE() and CURRENT\_DATE}
+\begin{itemize}
+    \item \texttt{CURDATE()} and \texttt{CURRENT\_DATE} are synonyms for retrieving the current date.
+\end{itemize}
+
+\subsection{CURTIME() and CURRENT\_TIME}
+\begin{itemize}
+    \item Use \texttt{CURTIME()} or its synonym \texttt{CURRENT\_TIME} to retrieve the current time, formatted in a 24-hour clock.
+\end{itemize}
+
+\subsection{Timestamp and Datetime Extraction}
+\begin{itemize}
+    \item The \texttt{TIMESTAMP} function takes a datetime value and a time value to return a datetime.
+    \item Use \texttt{EXTRACT()} to retrieve specific components such as:
+    \begin{itemize}
+        \item \texttt{YEAR}, \texttt{MONTH}, \texttt{DAY}
+        \item \texttt{HOUR}, \texttt{MINUTE}, \texttt{SECOND}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Date Manipulation and Differences}
+\begin{itemize}
+    \item \texttt{DATEDIFF()} calculates the difference in days between two dates.
+    \item Example:
+    \begin{verbatim}
+        SELECT username, info_updated, 
+               DATEDIFF(CURRENT_DATE, info_updated) AS difference
+        FROM test
+        WHERE DATEDIFF(CURRENT_DATE, info_updated) > 200
+        ORDER BY difference DESC;
+    \end{verbatim}
+    \item \texttt{DATE\_ADD()} allows you to add a specific interval to a date.
+\end{itemize}
+
+\newpage
+
+\section{String Operations}
+\subsection{Changing Case: UPPER() and LOWER()}
+\begin{itemize}
+    \item \texttt{UPPER()} converts strings to uppercase, and \texttt{LOWER()} converts them to lowercase.
+    \item Example:
+    \begin{verbatim}
+        SELECT UPPER(name), LOWER(name)
+        FROM members;
+    \end{verbatim}
+\end{itemize}
+
+\subsection{Concatenating Strings}
+\begin{itemize}
+    \item \texttt{CONCAT()} combines multiple strings into one without adding spaces between them.
+    \item Example:
+    \begin{verbatim}
+        SELECT CONCAT(first_name, ' ', last_name) AS Name
+        FROM customer_data;
+    \end{verbatim}
+\end{itemize}
+
+\subsection{Handling NULLs with COALESCE()}
+\begin{itemize}
+    \item \texttt{COALESCE()} helps handle \texttt{NULL} values in concatenation.
+    \item Example:
+    \begin{verbatim}
+        SELECT CONCAT(name, ' ', COALESCE(suffix, ''))
+        FROM members;
+    \end{verbatim}
+\end{itemize}
+
+\newpage
+
+\section{Arithmetic and Mathematical Operations}
+\begin{itemize}
+    \item Arithmetic operators such as \texttt{+}, \texttt{-}, \texttt{*}, and \texttt{/} are used for mathematical operations.
+    \item Example:
+    \begin{verbatim}
+        SELECT grocery, vendor, qty, buy_price, 
+               qty * buy_price AS totalSpent
+        FROM groceries
+        ORDER BY totalSpent DESC;
+    \end{verbatim}
+\end{itemize}
+
+\subsection{Extracting Substrings}
+\begin{itemize}
+    \item Use \texttt{SUBSTRING()} to extract a part of a string.
+    \item Example:
+    \begin{verbatim}
+        SELECT name, SUBSTRING(name FROM 1 FOR 1) AS firstLetter
+        FROM animalNames
+        ORDER BY firstLetter;
+    \end{verbatim}
+\end{itemize}
+
+\subsection{Calculating String Length}
+\begin{itemize}
+    \item \texttt{CHARACTER\_LENGTH()} returns the number of characters in a string.
+    \item Example:
+    \begin{verbatim}
+        SELECT name, CHARACTER_LENGTH(name) AS nameLength
+        FROM animalNames
+        ORDER BY nameLength DESC;
+    \end{verbatim}
+\end{itemize}
+
+\subsection{Trimming Unwanted Characters}
+\begin{itemize}
+    \item \texttt{TRIM()} removes leading or trailing characters from a string.
+    \item Example:
+    \begin{verbatim}
+        SELECT name, TRIM(LEADING 'S' FROM name)
+        FROM animalNames
+        WHERE SUBSTRING(name FROM 1 FOR 1) = 'S';
+    \end{verbatim}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,53 @@
+[
+    {
+        "Title": "My Comic Collection",
+        "LastUpdated": "May 24th, 2021",
+        "Comics": [
+            {
+                "Title": "The Amazing Spider-man",
+                "Publisher": "Marvel Comics",
+                "Volume": 1,
+                "Issue": 252,
+                "PurchasePrice": 0.6,
+                "Value": "100.00 US",
+                "SKU": "07148602457605"
+            },
+            {
+                "Title": "Tales of the Teen Titans",
+                "Publisher": "DC Comics",
+                "Volume": 1,
+                "Issue": 42,
+                "PurchasePrice": 0.75,
+                "Value": "75.00 CDN",
+                "SKU": "0709893122105"
+            },
+            {
+                "Title": "Detective Comics",
+                "Publisher": "DC Comics",
+                "Volume": 1,
+                "Issue": 880,
+                "PurchasePrice": 2.99,
+                "Value": "50 CDN",
+                "SKU": "76194129811588011"
+            },
+            {
+                "Title": "Peter Parker, The Spectacular Spider-man",
+                "Publisher": "Marvel Comics",
+                "Volume": 1,
+                "Issue": 83,
+                "PurchasePrice": 0.6,
+                "Value": "15 US",
+                "SKU": "0714860219910"
+            },
+            {
+                "Title": "Action Comics",
+                "Publisher": "National Allied Publications",
+                "Volume": 1,
+                "Issue": 1,
+                "PurchasePrice": 0.1,
+                "Value": "3,200,000.00 US",
+                "SKU": "None"
+            }
+        ]
+    }
+]

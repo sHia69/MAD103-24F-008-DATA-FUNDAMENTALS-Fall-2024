@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{fancyhdr}
+
+% Header
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MAD 103 - Data Fundamentals}
+\fancyhead[R]{Instructor: Sodiq Shofoluwe \thepage}
+
+\begin{document}
+
+\title{Table Joins in SQL}
+\author{Hia Al Saleh}
+\date{November 18th, 2024}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction to Relational Databases}
+Relational databases create relationships between two or more tables. This is useful when storing related information. For example:
+\begin{itemize}
+    \item We want to store information about a product and its supplier.
+    \item A simple product table can include attributes like \texttt{prod\_name}, \texttt{qty}, and \texttt{supplier}.
+    \item As data grows, storing all supplier contact details in the same table can become cumbersome and redundant.
+\end{itemize}
+
+\section{Creating Tables}
+Below are examples of how to create tables for products and suppliers:
+\subsection{Product Table}
+\begin{verbatim}
+CREATE TABLE product(
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    prod_name VARCHAR(30) NOT NULL,
+    qty SMALLINT NOT NULL,
+    supplier VARCHAR(10)
+) ENGINE=INNODB;
+\end{verbatim}
+
+\subsection{Extended Product Table with Supplier Information}
+\begin{verbatim}
+CREATE TABLE product(
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    prod_name VARCHAR(30) NOT NULL,
+    qty SMALLINT NOT NULL,
+    supplier VARCHAR(10),
+    contactName VARCHAR(50),
+    contactPhone CHAR(10),
+    contactEmail VARCHAR(30),
+    contactPosition VARCHAR(15)
+) ENGINE=INNODB;
+\end{verbatim}
+
+\subsection{Supplier Table}
+\begin{verbatim}
+CREATE TABLE supplier(
+    id INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    supplierName VARCHAR(30),
+    contactName VARCHAR(50),
+    contactPhone CHAR(10),
+    contactEmail VARCHAR(30),
+    contactPosition VARCHAR(15)
+);
+\end{verbatim}
+
+\section{Inserting Data into Tables}
+To insert data into these tables, the following SQL statements are used:
+
+\subsection{Inserting Data into the Supplier Table}
+\begin{verbatim}
+INSERT INTO supplier
+(supplierName, contactName, contactPhone, contactEmail, contactPosition)
+VALUES
+('Farm Chicken Supplier', 'John Doe', '555-6656', 'jdoe@email.com', 'Buyer'),
+('Cow Farms', 'Mike Smith', '666-9656', 'msmith@email.com', 'Manager');
+\end{verbatim}
+
+\subsection{Inserting Data into the Product Table}
+\begin{verbatim}
+INSERT INTO product
+(prod_name, qty, supplier)
+VALUES
+('Chicken', 2, 1),
+('Turkey', 14, 1),
+('Beef', 22, 2);
+\end{verbatim}
+
+\section{Retrieving Information}
+\begin{itemize}
+    \item Use the \texttt{SELECT} statement to retrieve information from tables.
+    \item Information can be pulled from multiple tables using joins.
+\end{itemize}
+
+\section{Types of Joins}
+Joins allow tables to be related row by row, satisfying specific conditions.
+
+\subsection{INNER JOIN}
+An \texttt{INNER JOIN} returns only the rows that satisfy the condition specified in the \texttt{ON} clause.
+
+\begin{verbatim}
+SELECT column1, column2, column3
+FROM table_a INNER JOIN table_b
+ON column_x = column_y;
+\end{verbatim}
+
+Example using the product and supplier tables:
+\begin{verbatim}
+SELECT *
+FROM product INNER JOIN supplier
+ON product.supplier = supplier.id;
+\end{verbatim}
+
+\subsection{OUTER JOIN}
+An \texttt{OUTER JOIN} returns rows from at least one of the tables, even if there is no match in the other table.
+
+\subsubsection{LEFT OUTER JOIN}
+Includes all rows from the left table and the matched rows from the right table.
+
+\begin{verbatim}
+SELECT a.au_fname, a.au_lname, p.pub_name
+FROM authors AS a LEFT OUTER JOIN publishers AS p
+ON a.city = p.city;
+\end{verbatim}
+
+\subsubsection{RIGHT OUTER JOIN}
+Includes all rows from the right table and the matched rows from the left table.
+
+\begin{verbatim}
+SELECT a.au_fname, a.au_lname, p.pub_name
+FROM authors AS a RIGHT OUTER JOIN publishers AS p
+ON a.city = p.city;
+\end{verbatim}
+
+\section{Querying with Conditions}
+Use conditions to filter and join tables:
+\begin{itemize}
+    \item Use \texttt{WHERE} to specify filtering conditions.
+    \item Use \texttt{ORDER BY} to sort the results.
+\end{itemize}
+
+Example:
+\begin{verbatim}
+SELECT products.productName, suppliers.companyName
+FROM products INNER JOIN suppliers
+ON products.SupplierID = suppliers.SupplierID
+WHERE country = 'United States'
+ORDER BY suppliers.companyName;
+\end{verbatim}
+
+\section{Group Data with Aggregations}
+To group data and perform aggregations, the \texttt{GROUP BY} clause is useful.
+
+Example:
+\begin{verbatim}
+SELECT s.companyName, COUNT(p.productName) AS numberOfProducts
+FROM suppliers AS s INNER JOIN products AS p
+ON s.SupplierID = p.SupplierID
+GROUP BY s.companyName
+ORDER BY numberOfProducts;
+\end{verbatim}
+
+\section{Summary}
+\begin{itemize}
+    \item Joins are a fundamental concept in SQL to combine data from multiple tables.
+    \item \texttt{INNER JOIN} retrieves matching rows, while \texttt{OUTER JOIN} includes non-matching rows.
+    \item Understanding joins is essential for efficient data querying and manipulation.
+\end{itemize}
+
+\end{document}

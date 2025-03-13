@@ -1,0 +1,34 @@
+{
+    "movies": [
+        {
+            "title": "Batman",
+            "yearReleased": "1989",
+            "actors": [
+                {
+                    "name": "Michael Keaton",
+                    "role": "Batman - Bruce Wayne"
+                },
+                {
+                    "name": "Jack Nicholson",
+                    "role": "Joker - Jack Napier"
+                }
+            ],
+            "wonAnOscar": false
+        },
+        {
+            "title": "Batman Begins",
+            "yearReleased": "2005",
+            "actors": [
+                {
+                    "name": "Christian Bale",
+                    "role": "Batman - Bruce Wayne"
+                },
+                {
+                    "name": "Liam Neeson",
+                    "role": "Ras Al Ghul - Henri Ducard"
+                }
+            ],
+            "wonAnOscar": false
+        }
+    ]
+}
