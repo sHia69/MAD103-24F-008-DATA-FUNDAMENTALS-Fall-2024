@@ -1,0 +1,38 @@
+Information Description
+----------------------------------
+Type: Online (O) or In-Store(I)
+Date: four digit year(2018) - two digit month (01) - two digit day (13)
+Phone: 10 digits - 5555555555
+Name: Customer's Name
+Email: email@domain.com
+ID: Transaction ID (000001)
+Product: Name of the Product
+Price: Cost of the Item
+ProdID: The ID for the product
+
+--------------
+**The orders**
+--------------
+
+O
+2016/01/11
+Henry Jones
+555 888 9999
+hjonessr@marshallcollege.edu
+ORDER ID 0000001
+leather journal
+$23.99
+1023983209
+
+I
+2016/01/07
+Marcus Brody
+555 888 2029
+mbrody@marshallcollege.edu
+ORDER ID 0000002
+caligraphy pen
+51.99
+1023987023
+leather journal
+$23.99
+1023983209

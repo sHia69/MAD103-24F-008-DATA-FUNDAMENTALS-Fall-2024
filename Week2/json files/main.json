@@ -1,0 +1,39 @@
+{
+    "orders": [
+      {
+        "type": "Online",
+        "date": "2016-01-11",
+        "name": "Henry Jones",
+        "phone": "5558889999",
+        "email": "hjonessr@marshallcollege.edu",
+        "transaction_id": "0000001",
+        "items": [
+          {
+            "product": "leather journal",
+            "price": "$23.99",
+            "prod_id": "1023983209"
+          }
+        ]
+      },
+      {
+        "type": "In-Store",
+        "date": "2016-01-07",
+        "name": "Marcus Brody",
+        "phone": "5558882029",
+        "email": "mbrody@marshallcollege.edu",
+        "transaction_id": "0000002",
+        "items": [
+          {
+            "product": "caligraphy pen",
+            "price": "$51.99",
+            "prod_id": "1023987023"
+          },
+          {
+            "product": "leather journal",
+            "price": "$23.99",
+            "prod_id": "1023983209"
+          }
+        ]
+      }
+    ]
+  }

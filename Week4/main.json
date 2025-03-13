@@ -1,0 +1,29 @@
+{
+  "comics": [
+    {
+      "title": "Batman",
+      "issue": "55",
+      "price": 3.99,
+      "description": "The KGBeast lives! The Russian super-assassin is back—but under whose orders? Does he have a specific mission, or is this simply some leftover Cold War mayhem? Nyet, comrade—it has to do with Bruce Wayne’s recent court case involving Mr. Freeze. Something is rotten in Gotham, and you can still smell it, even if it’s on ice!",
+      "talent": [
+        {
+          "artist": "Tony Daniels",
+          "writer": "Tom King"
+        }
+      ],
+      "pages": 32
+    },
+    {
+      "title": "Green Lantern",
+      "issue": "55",
+      "price": 3.99,
+      "description": "Then, Hank Henshaw, the Ravagers and Eon battle the Green Lantern Corps on Mogo for the fate of the universe! (In other words, it’s Tuesday.) Hal Jordan has had enough of this Man of Steel knockoff, so he’s seeking out the former Cyborg Superman with the sole intention of handing him his butt! However, Henshaw’s ability to hack the Corps’ power rings may give him all the leverage he needs to take over the universe.",
+      "talent": [
+        {
+          "artist": "Mike Perkins",
+          "writer": "Dan Jurgens"
+        }
+      ]
+    }
+  ]
+}
